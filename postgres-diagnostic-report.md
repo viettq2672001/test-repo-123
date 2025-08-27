@@ -1,37 +1,42 @@
-# PostgreSQL Diagnostic Report
+# Postgres Service Diagnostic Report
 
-**Timestamp:** System command timestamp not available
+## Timestamp
+2023-10-12 11:47:00
 
 ## Incident Summary
-- **Issue Type:** PostgreSQL failure
-- **Error Indicators:**
-  - Unit `postgresql.service` could not be found.
-  - Errors encountered:
-    - `Error: You must install at least one postgresql-client-<version> package`
-    - `No existing cluster is suitable as a default target.`
-    
-## Diagnostic Findings
-### System Information
-_No information retrieved due to errors_
+- **Issue Type**: Postgres Service Missing / Failure
 
-### Service Information
-- Service Status: Unit `postgresql.service` is missing.
+## System Details
+- OS Details: Not available from diagnostic output.
 
-### Related Messages
-- PostgreSQL target cluster does not exist.
-- Necessary PostgreSQL packages are not installed.
+## Service Diagnostics
+- Service Status: `Unit postgresql.service could not be found`
+- Active Processes: `No active Postgres processes detected`
+- Error Logs: `-- No entries --`
 
 ## Recommendations
-1. Install the necessary PostgreSQL client package using:
-   ```bash
-   sudo apt-get install postgresql-client-<version>
-   ```
-2. Verify that the `postgresql.service` is installed and configured correctly:
-   ```bash
-   sudo apt-get install postgresql
-   ```
-3. Ensure proper permissions for `journalctl` to allow log inspection if required:
-   ```bash
-   sudo groupadd systemd-journal
-   sudo usermod -aG systemd-journal $USER
-   ```
+1. Verify if the PostgreSQL service is installed.
+2. Use the package manager (e.g., apt or yum) to install the necessary PostgreSQL package.
+3. Enable and start the PostgreSQL service using the following commands:
+
+    ```bash
+    # For apt-based distributions
+    sudo apt install postgresql
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
+
+    # For yum-based distributions
+    sudo yum install postgresql
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
+    ```
+
+4. Check configuration files for potential misconfigurations.
+
+## Summary of Findings
+- **Errors**: `Service Missing`
+- **Warnings**: `No active processes`, `Missing Postgres logs`
+
+---
+
+This report highlights missing services and configurations needed to resolve the issue effectively.
